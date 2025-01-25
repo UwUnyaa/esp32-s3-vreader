@@ -44,8 +44,7 @@
 #include "SPI.h"
 
 
-//Uncomment and set up if you want to use custom pins for the SPI communication
-#define REASSIGN_PINS
+// Pin definitions
 int sck = 7;
 int miso = 6;
 int mosi = 5;
@@ -212,13 +211,9 @@ void setup() {
   Serial.begin(115200);
   Serial.println("Initializing SPI");
 
-#ifdef REASSIGN_PINS
   SPI.begin(sck, miso, mosi, cs);
   Serial.println("Initializing SD");
   if (!SD.begin(cs)) {
-#else
-  if (!SD.begin()) {
-#endif
     Serial.println("Card Mount Failed");
     return;
   }
